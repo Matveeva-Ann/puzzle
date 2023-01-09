@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <div class="informationWindow"><span class="x">x</span>"Для початку пересортуйте пазли натиснувши "Sort" після чого натисніть "Start" та почніть збирати пазл"</div>
+    <div class="conteiner">
+      <div class="auxiliary">
+        <div class="timer">00:00</div>
+        <div class="buttons">
+          <div>
+            <button type="button" class="btn-start btn">Start</button>
+          <button type="button" class="btn-sort btn">Sort</button>
+          </div>
+          <div>
+            <button type="button" class="btn-check btn">Check</button>
+            <button type="button" class="btn-reset btn">Reset</button>
+          </div>
+          <div class="false">Puzzle is assembled incorrectly</div>
+        </div>
+      </div>
+      
+      <div class="firstBlock">
+        <div class="cell js-class"><div class="puzzle" data-item = '1' draggable="true"></div></div>
+        <div class="cell js-class"><div class="puzzle" data-item = '2' draggable="true"></div></div>
+        <div class="cell js-class"><div class="puzzle" data-item = '3' draggable="true"></div></div>
+        <div class="cell js-class"><div class="puzzle" data-item = '4' draggable="true"></div></div>
+        <div class="cell js-class"><div class="puzzle" data-item = '5' draggable="true"></div></div>
+        <div class="cell js-class"><div class="puzzle" data-item = '6' draggable="true"></div></div>
+      </div>
+      <div class="secondBlock">
+        <div class="cell js-class"></div>
+        <div class="cell js-class"></div>
+        <div class="cell js-class"></div>
+        <div class="cell js-class"></div>
+        <div class="cell js-class"></div>
+        <div class="cell js-class"></div>
+      </div>
+    </div>
+
+    <div id="load">
+      <div>T</div>
+      <div>C</div>
+      <div>E</div>
+      <div>R</div>
+      <div>R</div>
+      <div>O</div>
+      <div>C</div>
+    </div>
+
+
+    <script src="./script.js"></script>
+    <canvas id="c"></canvas>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+  #ifdef GL_ES
+  precision highp float;
+  #endif
+
+  void main(void) {
+    gl_FragColor = vec4(1, 0.2, 0.2, 1.0);
+  }
+</script>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+  attribute vec2 vertexPosition;
+  uniform vec2 u_resolution;
+
+  void main(void) {
+
+    vec2 zeroToOne = vertexPosition / u_resolution;
+    vec2 zeroToTwo = zeroToOne * 2.0;
+    vec2 clipSpace = zeroToTwo - 1.0;
+
+    gl_Position = vec4(clipSpace * vec2(1.0, -1.0), 0.0, 1.0);
+
+  }
+</script>
+
+    <script src="./scriptAnimation.js"></script>
+  </body>
+</html>
